@@ -1,0 +1,42 @@
+// This file contains the variables for the project.
+
+/* The reason I was drawn to SASS in the first place, altoguh through var(--x) 
+they are available in CSS now, just way less intuitive. I rely on variables more 
+and more with each passing project, formerly just pallets and now lyout, spacing 
+and file paths. */
+
+/* I love the little built in functions like lighten and darken as 
+well, cool little things. */
+
+// COLOR
+
+$custom-1: rgba(63,94,251,1);
+$custom-2: rgba(252,70,107,1);
+$lightDefault: #ffffff;
+$darkDefault: #17242b;
+$brandPrimary: #0d66eb;
+$brandSecondary: #c4c4c4;
+$brandTrans: transparentize($brandPrimary, .5);
+$brandLighter: lighten($brandPrimary, .25);
+$brandDarker: darken($brandPrimary, .75);
+$success: rgb(19, 217, 98);
+
+// SPACING & LAYOUT
+
+$xlExternalSpace: 8rem;
+$lgExternalSpace: 4.5rem;
+$mdExternalSpace: 3rem;
+$smExternalSpace: 1.5rem;
+$smInternalSpace: 1.5rem;
+$mdInternalSpace: 3rem;
+$lgInternalSpace: 4.5rem;
+
+// BREAK POINTS
+
+$small: 39.9375em;
+$medium: 40em;
+$large: 64em;
+
+// Pathing
+
+$assetPath: '../../img/';

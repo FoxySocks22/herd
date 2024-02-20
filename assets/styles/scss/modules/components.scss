@@ -1,0 +1,331 @@
+/* This file contains styles for either reusable or single use components.
+In a more fleshed out project, a component would have its own individual style
+file, as apposed to all components being in a single file. But to keep a relatively 
+flat strucutre all my components both gloabl and reusables are centralised. */
+
+/* I personally prefer to have nested media queries, not that it better or worse 
+than say a standalone media file, I just personally find the granularity easier to 
+manage. */
+
+// Reusable components
+
+.btn {
+    transition: all .5s;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    @media screen and (min-width: $medium){
+        font-size: 1.8rem;
+        display: inline-block;
+    }
+    &--ghost {
+        @extend .btn;
+        position: relative;
+        background: $lightDefault;
+        border: none;
+        &::after {
+            content: '';
+            transition: all .5s;
+            position: absolute;
+            width: 0;
+            height: .5rem;
+            background: $brandPrimary;
+            bottom: 0;
+            left: 0;
+        }
+        &:hover {
+            transition: all .5s;
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.input {
+    outline: none;
+    height: 5rem;
+    border: 1px solid $brandSecondary;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    padding: .5rem;
+    width: 100%;
+    @media screen and (min-width: $medium){
+        width: 50%;
+        font-size: 1.8rem;
+    }
+    &:valid {
+        border-color: $success;
+    }
+}
+
+/* This is entirely custom and off brief - I know. Just felt like it would be 
+a unique way of adding my thoughts to both the design and justify my approach. */
+
+.modal { 
+    position: absolute;
+    z-index: 2;
+    width: 50%;
+    min-height: 20rem;
+    padding: 1rem;
+    background: linear-gradient(90deg, $custom-1 0%, $custom-2 100%);
+    border-radius: 2.5rem;
+    &_content {
+        border-radius: 2.5rem;
+        position: relative;
+        width: 100%;
+        background: $lightDefault;
+        padding: 3rem;
+        > span, > h2 {
+            background: linear-gradient(90deg, $custom-1 0%, $custom-2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        > h2 {
+            margin-bottom: 3rem;
+        }
+        > span {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+    }
+}
+
+// Gloabl components
+
+.header {
+    margin-bottom: $mdExternalSpace;
+    &_logo {
+        margin-bottom: $xlExternalSpace;
+        @media screen and (max-width: $small){
+            margin-bottom: $mdExternalSpace;
+            display: flex;
+            justify-content: center;
+        }
+        > div {
+            background-image: url('#{$assetPath}logo.jpg');
+            height: 10rem;
+            width: 10rem;
+            @media screen and (max-width: $small){
+                height: 5rem;
+                width: 5rem;
+            }
+        }
+    }
+    &_intro {
+        h2 {
+            color: $brandPrimary;
+            text-transform: uppercase;
+        }
+        h1 {
+            margin: $mdExternalSpace 0 $smExternalSpace 0;
+        }
+        span {
+            display: block;
+            margin-bottom: $mdExternalSpace;
+        }
+    }
+    &_carousel {
+        > div.slide{
+            position: relative;
+            span {
+                position: absolute;
+                font-size: 2rem;
+                top: calc(50% - (3.5rem / 2));
+                border: .1rem solid $lightDefault;
+                color: $lightDefault;
+                padding: .5rem;
+                font-weight: bold;
+                line-height: 1;
+                cursor: pointer;
+                &:first-of-type {
+                    left: 3rem;
+                }
+                &:last-of-type {
+                    right: 3rem;
+                }
+            }
+        }
+    }
+}
+
+/* Much of this section was built to showcase capabilities with SASS 
+rather than the methods used being specifically pragmatic for delivery, 
+but as it's a test I feel a degree of creativity over pragmatism is fine. */
+
+@mixin slide {
+    display: inline-block;
+    border: transparent .3rem solid;
+    transition: all .5s;
+    padding: .25rem .25rem $mdInternalSpace .25rem;
+    width: 25rem;
+    @media screen and (min-width: $medium){
+        width: calc(100% / 3);
+    }
+    &:hover {
+        cursor: pointer;
+        transition: all .5s;
+        border-color: $brandLighter;
+    }
+}
+
+@function generateBgImage($ref){
+    @return '#{$assetPath}slide-#{$ref}.jpg';
+}
+
+@for $i from 1 through 4 {
+    .slide-img-#{$i} {
+        width: 100%;
+        height: 25rem;
+        margin-bottom: $smExternalSpace;
+        background-image: url(#{generateBgImage($i)});
+    }
+}
+
+.footer {
+    margin: $mdExternalSpace 0 $mdExternalSpace 0;
+    @media screen and (min-width: $medium){
+        margin: $xlExternalSpace 0 $xlExternalSpace 0;
+    }
+    &_carousel {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 10rem;
+            transition: all .5s;
+            background: transparent;
+            clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+        } 
+        &:hover::after {
+            transition: all .5s;
+            background: $brandTrans;
+        }
+    }
+    &_slide {
+        @include slide;
+        &:not(:last-of-type){
+            margin-right: $mdExternalSpace;
+        }
+        div:nth-of-type(2) {
+            > span {
+                margin-top: $smExternalSpace;
+                display: block;
+                color: $brandSecondary;
+            }
+        }
+    }
+}
+
+.baseplate {
+    background: $brandDarker;
+    > div {
+        width: 95%;
+        margin: 0 auto;
+        padding: $mdInternalSpace 0;
+        @media screen and (min-width: $medium){
+            padding: $mdInternalSpace 5rem;
+            width: 80%;
+        }
+        > span {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
+}
+
+// Single use components
+
+.main {
+    &_content {
+        h2, p, div {
+            margin-bottom: $lgExternalSpace;
+            @media screen and (max-width: $small){
+                margin-bottom: $mdExternalSpace;
+            }
+        }
+        .quote {
+            padding: $lgInternalSpace;
+            position: relative;
+            &::before {
+                content: '\0022';
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: $brandSecondary;
+                font-size: 7.5rem;
+            }
+        }
+        .container-full {
+            background-image: url('#{$assetPath}body-img.jpg');
+        }
+        .author {
+            display: flex;
+            border-bottom: 2px solid $darkDefault;
+            div:first-of-type {
+                margin-right: $mdExternalSpace;
+            }
+            div:last-of-type {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            p {
+                margin-bottom: 0;
+            }
+            h2 {
+                margin-bottom: $smExternalSpace;
+            }
+            img {
+                width: 12.5rem;
+                height: 12.5rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.form {
+    &_content {
+        h2 {
+            margin-bottom: $mdExternalSpace;
+        }
+        .form-group {
+            @media screen and (max-width: $small){
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+        }
+        .input {
+            margin: $smExternalSpace 0;
+        }
+        button {
+            @media screen and (min-width: $medium){
+                margin-left: $mdExternalSpace;
+            }
+        }
+        input[type=checkbox] {
+            width: 1.5rem;
+            height: 1.5rem;
+            @media screen and (min-width: $medium){
+                width: 3rem;
+                height: 3rem;
+                transform: translateY(9px);
+                margin-right: $smExternalSpace;
+            }
+        }
+    }
+}

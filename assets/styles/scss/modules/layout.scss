@@ -1,0 +1,22 @@
+/* Layout styles, this is where, if needed things like custom grids would 
+have been used. */
+
+.root {
+    position: relative;
+    margin-top: $smExternalSpace;
+    @media screen and (min-width: 40em){
+        margin: 3rem 5rem;
+    }
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    @media screen and (max-width: $small){
+        width: 95%;
+    }
+}
+
+.container-full {
+    width: 100%;
+}

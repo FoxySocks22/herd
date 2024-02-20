@@ -1,0 +1,18 @@
+/* This file acts as a centralised imports file for SASS modules, it also 
+contains universal styles that aren't otherwise categorised. On a full project, 
+each component would have it's own main.scss file to import only what it needs.*/
+
+@import 'modules/imports.scss';
+@import 'modules/variables.scss';
+@import 'modules/utils.scss';
+@import 'modules/typography.scss';
+@import 'modules/animations.scss';
+@import 'modules/layout.scss';
+@import 'modules/components.scss';
+
+
+/* To Do
+1) Modularise JS
+2) Functioning slider at the top, swap IMG src tag on click and add transiton 
+effect with CSS
+*/

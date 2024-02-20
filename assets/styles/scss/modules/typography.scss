@@ -1,0 +1,94 @@
+// This module styles text components, inlcuding: spans, linnks and lists.
+
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+// HEADINGS
+
+.heading {
+    margin: 0;
+    text-transform: capitalize;
+    &--primary {
+        @extend .heading;
+        font-size: 3rem;
+        @media screen and (min-width: $medium){
+            font-size: 4rem;
+        }
+    }
+    &--secondary {
+        @extend .heading;
+        font-size: 2rem;
+        @media screen and (min-width: $medium){
+            font-size: 2.5rem;
+        }
+    }
+    &--minor {
+        @extend .heading;
+        font-size: 1.6rem;
+        @media screen and (min-width: $medium){
+            font-size: 1.8rem;
+        }
+    }
+}
+
+// LISTS
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &_item {
+        position: relative;
+        font-size: 1.45rem;
+        @media screen and (min-width: $medium){
+            font-size: 1.8rem;
+        }
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+        &:last-of-type {
+            margin-bottom: 0;
+        };
+        &::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+        }
+    }
+}
+
+// Longcopy
+
+.copy {
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    @media screen and (min-width: $medium){
+        font-size: 1.8rem;
+    }
+    &--light {
+        @extend .copy;
+        color: #fff;
+    }
+    &--dark {
+        @extend .copy;
+        color: black;
+    }
+}
+
+// Labels
+label {
+    font-weight: bold;
+    color: $darkDefault;
+    font-size: 1.5rem;
+    display: block;
+    @media screen and (min-width: $medium){
+        display: inline-block;
+        font-size: 1.8rem;
+    }
+}

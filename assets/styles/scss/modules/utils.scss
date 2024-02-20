@@ -1,0 +1,36 @@
+// This file holds helper and fixit classes as well as one-time-use CSS
+
+* {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1 rem = 10px, easy maths 
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.img-back {
+    width: 100%;
+    height: 60rem;
+    &--css-bg {
+        @extend .img-back;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    &--inline {
+        @extend .img-back;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+#footer-carousel::-webkit-scrollbar {
+    display: none;
+}
+  
+#footer-carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
